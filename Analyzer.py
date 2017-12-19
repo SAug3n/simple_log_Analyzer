@@ -11,8 +11,20 @@ def show_col(log_file):
 		cols=line.split( )
 		for i in range(len(cols)):
 			if str(i) in need_print_cols:
-				print cols[i],
+				print cols[i-1],
 		print '\n'
+
+def get_count(log_file):
+	i=int(sys.argv[3])
+	s=set()
+	l=[]
+	for line in log_file:
+		cols=line.split( )
+		s.add(cols[i-1])
+		l.append(cols[i-1])
+	for i in s:
+		print i+' count:'+str(l.count(i))
+
 
 def main():
 	if len(sys.argv) < 2: 
@@ -30,6 +42,9 @@ def main():
 	else:
 		if (sys.argv[2]=="--show-col"):#--show-col 1,3,4,5,6
 			show_col(log_file)
+			return
+		if (sys.argv[2]=="--get-count"):
+			get_count(log_file)
 			return
 		#if (sys.argv[2]=="--xxxx"):
 
